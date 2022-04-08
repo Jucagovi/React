@@ -14,7 +14,7 @@
     border-radius: 4px;
 }
 
-.header p.logo{
+.header p.logo {
     font-size: 25px;
     font-weight: bold;
     color: #4284f5;
@@ -28,6 +28,7 @@
 .header p.active {
     background-color: dodgerblue;
     color: white;
+    font-weight: bold;
 }
 
 .header-right {
@@ -36,7 +37,7 @@
 
 @media screen and (max-width: 500px) {
     .header p {
-        float:none;
+        float: none;
         display: block;
         text-align: left;
     }

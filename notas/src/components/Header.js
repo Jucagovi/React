@@ -16,7 +16,7 @@ function Header() {
       setActiveTab("Add");
     }
   });
-
+  //value={props.id ? "Editar" : "Crear nuevo"}
   return (
     <React.Fragment>
       <div className="header">
@@ -26,23 +26,25 @@ function Header() {
         <div className="header-right">
           <Link to="/">
             <p
-              className={`${activeTab === "Home"} ? "active" : ""`}
-              onClick={() => setActiveTab("Home")}
+              className={activeTab === "Home" ? "active" : ""}
+              onClick={() => {
+                setActiveTab("Home");
+              }}
             >
               Home
             </p>
           </Link>
           <Link to="/add">
             <p
-              className={`${activeTab === "Add"} ? "active" : ""`}
+              className={activeTab === "Add" ? "active" : ""}
               onClick={() => setActiveTab("Add")}
             >
-              Añadir alumno
+              Notas
             </p>
           </Link>
           <Link to="/update">
             <p
-              className={`${activeTab === "View"} ? "active" : ""`}
+              className={activeTab === "View" ? "active" : ""}
               onClick={() => setActiveTab("View")}
             >
               Ver progresión
