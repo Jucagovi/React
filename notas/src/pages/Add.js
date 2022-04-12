@@ -3,26 +3,57 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./Add.css";
 import { basedatos } from "../firebase.js";
 import { toast } from "react-toastify";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  updateDoc,
+  doc,
+  arrayUnion,
+} from "firebase/firestore";
 
+// En la base de datos tengo un JSON con la estructura de "Curso".
+// La idea es crear una práctica (objeto) y meterla en el Array "practicas" del objeto "Curso".
+
+const curso = {
+  id: "21-22DAW",
+  curso: "2021/22",
+  modulo: "DAW",
+  practicas: [
+    {
+      id: 1,
+      orden: 1,
+      titulo: "Práctica de prueba",
+      numero: "1.1",
+      peso: 10,
+      evaluacion: 1,
+    },
+    {
+      id: 2,
+      orden: 2,
+      titulo: "Práctica de prueba 2",
+      numero: "1.2",
+      peso: 10,
+      evaluacion: 1,
+    },
+    {
+      id: 3,
+      orden: 3,
+      titulo: "Práctica de prueba 3",
+      numero: "1.3",
+      peso: 40,
+      evaluacion: 1,
+    },
+  ],
+};
+
+// Estado inicial del objeto "practica".
 const initialState = {
-  modulo: "",
-  orden: "",
+  id: 0,
+  orden: 0,
   titulo: "",
   numero: "",
-  cursos: [],
-};
-// Objeto de prueba
-const feo = {
-  modulo: "DAW",
-  orden: "2",
-  titulo: "Práctica de prueba",
-  numero: "0.1",
-  cursos: ["2020/21", "2021/22"],
-  direccion: [
-    { calle: "Elm street", numero: "34", ciudad: "Pensilvania" },
-    { calle: "Pasos", numero: "55", ciudad: "Elda" },
-  ],
+  peso: 0,
+  evaluacion: 0,
 };
 
 //const guardarPractica = async (practica) => {};
@@ -31,35 +62,49 @@ const Add = () => {
   // Estado del componente
   const [state, setState] = useState(initialState);
   // Decontruyendo el objeto "state" en variables separadas.
-  const { modulo, orden, titulo, numero, cursos } = state;
+  const { id, orden, titulo, numero, peso, evaluacion } = state;
 
   // Funciones para los manejadores
+
   const guardarPractica = async (e) => {
     // Evito en comportamiento por defecto
     e.preventDefault();
     // Compruebo los valores del estado (values de formulario)
-    if (!modulo || !orden || !titulo || !numero || !cursos) {
+    if (!id || !orden || !titulo || !numero || !peso || !evaluacion) {
       toast.error("Por favor, complete todos los campos.");
     } else {
       // Apunto hacia la colección
       const colPracticas = collection(basedatos, "practicas");
-      const guardado = await addDoc(colPracticas, state);
-      //const guardado = await addDoc(colPracticas, feo);
+      //const guardado = await addDoc(colPracticas, curso);
+      const id = "DkoHX6bZY0MAtW8wpjtT";
+      const guardado = await updateDoc(doc(colPracticas, id), {
+        practicas: arrayUnion(state),
+      });
       if (!guardado) {
         toast.error(
           "Se ha producido un error mientras se guardaba la práctica."
         );
       } else {
-        toast.done(`Guardada la práctica con id ${guardado.id}`);
+        toast.info(`Guardada la práctica con id ${guardado.id}`);
         console.log(`Guardada la práctica con id ${guardado.id}`);
+        console.log(guardado);
       }
     }
+    /* console.log(curso.practicas.length);
+    curso.practicas.push(state);
+    console.log(curso); */
   };
 
+  // Actualizar el estado del componente cada vez que se cambie un input.
+  // Problema con el tipo de datos: input siempre será string.
+  //  -> Para solucinarlo se debe convertir el tipo al meterlo en el state
   const cambiarEstado = (e) => {
     const { name, value } = e.target;
-    //setState({ ...state, [name]: value });
-    setState(feo);
+    if (name === "id" || name === "orden" || name === "peso") {
+      setState({ ...state, [name]: Number(value) });
+    } else {
+      setState({ ...state, [name]: value });
+    }
     console.log(state);
   };
 
@@ -88,13 +133,13 @@ const Add = () => {
             onChange={cambiarEstado}
           ></input>
 
-          <label htmlFor="modulo">Módulo de la práctica</label>
+          <label htmlFor="modulo">Id de la práctica</label>
           <input
-            type="text"
-            id="modulo"
-            name="modulo"
+            type="number"
+            id="id"
+            name="id"
             placeholder=""
-            value={modulo}
+            value={id}
             onChange={cambiarEstado}
           ></input>
 
@@ -108,13 +153,23 @@ const Add = () => {
             onChange={cambiarEstado}
           ></input>
 
-          <label htmlFor="anos">Curso de la práctica </label>
+          <label htmlFor="peso">Peso de la práctica</label>
+          <input
+            type="number"
+            id="peso"
+            name="peso"
+            placeholder=""
+            value={peso}
+            onChange={cambiarEstado}
+          ></input>
+
+          <label htmlFor="evaluacion">Evaluación de la práctica</label>
           <input
             type="text"
-            id="cursos"
-            name="cursos"
+            id="evaluacion"
+            name="evaluacion"
             placeholder=""
-            value={cursos}
+            value={evaluacion}
             onChange={cambiarEstado}
           ></input>
 
