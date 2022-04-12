@@ -28,7 +28,8 @@ input[type="submit"]:hover {
 
 .cont_practicas{
     width: 50%;
-    align-items: center;;
+    align-items: center;
+    margin-top: 100px;
 }
 
 .formulario {
