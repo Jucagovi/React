@@ -120,6 +120,7 @@ const Add = () => {
 
           <input type="submit" value="Guardar"></input>
         </form>
+        <pre id="codigo">{JSON.stringify(state, null, 2)}</pre>
       </div>
     </React.Fragment>
   );
