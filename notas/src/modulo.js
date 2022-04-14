@@ -74,5 +74,25 @@ export let modulo = {
         },
       ],
     },
+    {
+      id: "3",
+      nombre: "Pedro",
+      apellidos: "García Feo",
+      repetidor: 0,
+      notas: [
+        {
+          numero: "1.1",
+          nota: 60,
+        },
+        {
+          numero: "1.2",
+          nota: 50,
+        },
+        {
+          numero: "1.3",
+          nota: 60,
+        },
+      ],
+    },
   ],
 };

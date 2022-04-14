@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddPractica.css";
 import { basedatos } from "../firebase.js";
 import { toast } from "react-toastify";
