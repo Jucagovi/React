@@ -1,53 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import "./Add.css";
+import React, { useState } from "react";
+import "./AddPractica.css";
 import { basedatos } from "../firebase.js";
 import { toast } from "react-toastify";
 import {
-  addDoc,
   collection,
   updateDoc,
   doc,
   arrayUnion,
+  Timestamp,
 } from "firebase/firestore";
 
-// En la base de datos tengo un JSON con la estructura de "Curso".
-// La idea es crear una práctica (objeto) y meterla en el Array "practicas" del objeto "Curso".
-
-const curso = {
-  id: "21-22DAW",
-  curso: "2021/22",
-  modulo: "DAW",
-  practicas: [
-    {
-      id: 1,
-      orden: 1,
-      titulo: "Práctica de prueba",
-      numero: "1.1",
-      peso: 10,
-      evaluacion: 1,
-    },
-    {
-      id: 2,
-      orden: 2,
-      titulo: "Práctica de prueba 2",
-      numero: "1.2",
-      peso: 10,
-      evaluacion: 1,
-    },
-    {
-      id: 3,
-      orden: 3,
-      titulo: "Práctica de prueba 3",
-      numero: "1.3",
-      peso: 40,
-      evaluacion: 1,
-    },
-  ],
-};
+// Temporal hasta que haga el menú de selección del módulo.
+const id = "l1IhRN3ti7rCsqpbpBd4";
 
 // Estado inicial del objeto "practica".
-const initialState = {
+const estadoInicial = {
   id: 0,
   orden: 0,
   titulo: "",
@@ -56,30 +23,39 @@ const initialState = {
   evaluacion: 0,
 };
 
-//const guardarPractica = async (practica) => {};
+const id_aleatorio = Timestamp.now().toMillis() % 1000000;
 
-const Add = () => {
-  // Estado del componente
-  const [state, setState] = useState(initialState);
+const AddPractica = () => {
+  // Estado del componente.
+  const [practica, setPractica] = useState(estadoInicial);
   // Decontruyendo el objeto "state" en variables separadas.
-  const { id, orden, titulo, numero, peso, evaluacion } = state;
+  const { id, orden, titulo, numero, peso, evaluacion } = practica;
 
-  // Funciones para los manejadores
-
+  // *** Funciones para los manejadores *****************
   const guardarPractica = async (e) => {
-    // Evito en comportamiento por defecto
+    // Evito en comportamiento por defecto.
     e.preventDefault();
-    // Compruebo los valores del estado (values de formulario)
+    // Compruebo los valores del estado (values de formulario).
     if (!id || !orden || !titulo || !numero || !peso || !evaluacion) {
       toast.error("Por favor, complete todos los campos.");
     } else {
-      // Apunto hacia la colección
-      const colPracticas = collection(basedatos, "practicas");
-      //const guardado = await addDoc(colPracticas, curso);
-      const id = "DkoHX6bZY0MAtW8wpjtT";
-      const guardado = await updateDoc(doc(colPracticas, id), {
+      // Apunto hacia la colección.
+      const colPracticas = collection(basedatos, "modulos");
+      // Guardo (actualizo el array) la práctica en Firestore.
+      /* const guardado = await updateDoc(doc(colPracticas, id), {
         practicas: arrayUnion(state),
-      });
+      }); */
+      updateDoc(doc(colPracticas, id), { practicas: arrayUnion(practica) })
+        .then((datos) => {
+          toast.info(`Guardada la práctica con id ${datos.id}`);
+          console.log(`Guardada la práctica con id ${datos}`);
+        })
+        .catch(() => {
+          toast.error(
+            "Se ha producido un error mientras se guardaba la práctica."
+          );
+        });
+      /*   
       if (!guardado) {
         toast.error(
           "Se ha producido un error mientras se guardaba la práctica."
@@ -87,12 +63,8 @@ const Add = () => {
       } else {
         toast.info(`Guardada la práctica con id ${guardado.id}`);
         console.log(`Guardada la práctica con id ${guardado.id}`);
-        console.log(guardado);
-      }
+      } */
     }
-    /* console.log(curso.practicas.length);
-    curso.practicas.push(state);
-    console.log(curso); */
   };
 
   // Actualizar el estado del componente cada vez que se cambie un input.
@@ -100,12 +72,17 @@ const Add = () => {
   //  -> Para solucinarlo se debe convertir el tipo al meterlo en el state
   const cambiarEstado = (e) => {
     const { name, value } = e.target;
+    // Modifico el objeto de estado (sólo el valor necesario).
+    practica.id = id_aleatorio;
+    // Inmediatamente modifico el estado con el objeto modificado para que se redibuje el componente.
+    setPractica(practica);
+    // Cambio la parte del estado a la que apunta el formulario.
     if (name === "id" || name === "orden" || name === "peso") {
-      setState({ ...state, [name]: Number(value) });
+      setPractica({ ...practica, [name]: Number(value) });
     } else {
-      setState({ ...state, [name]: value });
+      setPractica({ ...practica, [name]: value });
     }
-    console.log(state);
+    console.log(practica);
   };
 
   return (
@@ -175,10 +152,10 @@ const Add = () => {
 
           <input type="submit" value="Guardar"></input>
         </form>
-        <pre id="codigo">{JSON.stringify(state, null, 2)}</pre>
+        <pre id="codigo">{JSON.stringify(practica, null, 2)}</pre>
       </div>
     </React.Fragment>
   );
 };
 
-export default Add;
+export default AddPractica;

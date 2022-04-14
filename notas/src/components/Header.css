@@ -3,29 +3,30 @@
     background-color: #f1f1f1;
 }
 
-.header p {
+.header a {
     float: left;
     color: black;
     text-align: center;
-    padding: 10px;
+    padding: 14px;
     text-decoration: none;
     font-size:18px;
     line-height: 15px;
     border-radius: 4px;
+    margin: 8px;
 }
 
-.header p.logo {
+.header .logo {
     font-size: 25px;
     font-weight: bold;
     color: #4284f5;
 }
 
-.header p:hover {
+.header a:hover {
     background-color: #ddd;
     color: #5d6770;
 }
 
-.header p.active {
+.header a.active {
     background-color: dodgerblue;
     color: white;
     font-weight: bold;
@@ -36,7 +37,7 @@
 }
 
 @media screen and (max-width: 500px) {
-    .header p {
+    .header a {
         float: none;
         display: block;
         text-align: left;
