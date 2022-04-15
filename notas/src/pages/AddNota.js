@@ -10,6 +10,10 @@ import {
 import { toast } from "react-toastify";
 import { modulo } from "../modulo.js";
 import "./AddNota.css";
+import { Col, Container, Row } from "react-bootstrap";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddPractica from "./AddPractica.js";
+import View from "./View.js";
 
 const estadoInicial = {
   nota: 0,
@@ -59,74 +63,84 @@ function AddNota() {
 
   return (
     <React.Fragment>
-      <h1>Notas</h1>
-      <div>
-        {modulo.discentes.map((discente, indice) => {
-          return (
-            <div key={discente.id}>
-              {discente.nombre} {discente.apellidos} -- 1.7 --{" "}
-              <input id={discente.id} name="nota" type="number" /> --
-              <input
-                type="button"
-                value="Guardar"
-                onClick={() =>
-                  actualizarNota(
-                    indice,
-                    "1.4",
-                    document.getElementById(discente.id).value
-                  )
-                }
-              />
+      <Container fluid>
+        <Row>
+          <Col sm={3}></Col>
+          <Col sm={9}>
+            <h1>Notas</h1>
+            <pre>{JSON.stringify(calificacion, null, 2)}</pre>
+            <div>
+              {modulo.discentes.map((discente, indice) => {
+                return (
+                  <div key={discente.id}>
+                    {discente.nombre} {discente.apellidos} -- 1.7 --{" "}
+                    <input id={discente.id} name="nota" type="number" /> --
+                    <input
+                      type="button"
+                      value="Guardar"
+                      onClick={() =>
+                        actualizarNota(
+                          indice,
+                          "1.4",
+                          document.getElementById(discente.id).value
+                        )
+                      }
+                    />
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </div>
-      <div>
-        {modulo.discentes.map((e) => {
-          return (
-            <div key={e.id}>
-              <div>
-                {e.id} -- {e.nombre} -- {e.apellidos}
-              </div>
-              <div>
-                {e.notas.map((ele) => {
-                  return (
+            <div>
+              {modulo.discentes.map((e) => {
+                return (
+                  <div key={e.id}>
                     <div>
-                      {ele.numero} -- {ele.nota}
+                      {e.id} -- {e.nombre} -- {e.apellidos}
                     </div>
-                  );
-                })}
-              </div>
+                    <div>
+                      {e.notas.map((ele) => {
+                        return (
+                          <div>
+                            {ele.numero} -- {ele.nota}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </div>
-      <div>
-        <form className="formulario">
-          <label htmlFor="titulo">Número de la práctica</label>
-          <input
-            type="text"
-            id="numero"
-            name="numero"
-            placeholder=""
-            value={numero}
-            onChange={eventoNota}
-          ></input>
+            <div>
+              <form className="formulario">
+                <label htmlFor="titulo">Número de la práctica</label>
+                <input
+                  type="text"
+                  id="numero"
+                  name="numero"
+                  placeholder=""
+                  value={numero}
+                  onChange={eventoNota}
+                ></input>
 
-          <label htmlFor="nota">Nota de la práctica</label>
-          <input
-            type="number"
-            id="nota"
-            name="nota"
-            placeholder=""
-            value={nota}
-            onChange={eventoNota}
-          ></input>
-          <input type="button" value="Guardar" onClick={guardarNota}></input>
-        </form>
-      </div>
-
-      <pre>{JSON.stringify(calificacion, null, 2)}</pre>
+                <label htmlFor="nota">Nota de la práctica</label>
+                <input
+                  type="number"
+                  id="nota"
+                  name="nota"
+                  placeholder=""
+                  value={nota}
+                  onChange={eventoNota}
+                ></input>
+                <input
+                  type="button"
+                  value="Guardar"
+                  onClick={guardarNota}
+                ></input>
+              </form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
   );
 }
