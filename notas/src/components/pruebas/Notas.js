@@ -1,5 +1,10 @@
 import React from "react";
-import { modulo } from "../modulo";
+import { modulo } from "../../modulo";
+import Cargando from "../Cargando";
+
+/* Uso del operador ? en objetos.
+modulos?.discentes -> si modulos no es un obejto no intentará acceder a discentes.
+modulos?.discentes?.notas -> sólo si modulos y discentes son objetos accederá a notas. */
 
 function Notas(props) {
   return (
@@ -9,6 +14,7 @@ function Notas(props) {
           <p>id = {props.id}</p>
           {/* <pre>{JSON.stringify(modulo.discentes[props.id], null, 2)}</pre> */}
           <div>
+            <Cargando />
             {modulo.discentes[props.id].notas.map((nota) => {
               return (
                 <div>

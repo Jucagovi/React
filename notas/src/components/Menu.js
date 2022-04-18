@@ -1,41 +1,56 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import "./Header.css";
 
 const Menu = () => {
+  /* Integración menús Bootstarp con react-router-dom
+    ->  Hay que utilizar el atributo as={NavLink} àra que funcione como un objeto de react-router-dom,
+        pero aplicando los estilos de Bootstrap.
+    */
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">
+          Notas App
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">
-              <NavLink
-                to="/"
-                className={(data) => (data.isActive ? "active" : "")}
-              >
-                Inicio
-              </NavLink>
+            <Nav.Link as={NavLink} to="/">
+              Inicio
             </Nav.Link>
-            <Nav.Link href="#link">
-              <NavLink
-                to="/addnota"
-                className={({ isActive }) => (isActive ? "active" : "")} // Otra forma de hacerlo: deconstruyendo el objeto data.
-              >
-                Notas
-              </NavLink>
+            <Nav.Link as={NavLink} to="/addnota">
+              Discentes
             </Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+            <NavDropdown title="Prácticas" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">
+                Informe resumen
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Inserción de notas
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Evaluaciones" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">
+                Informe resumen
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Revisar prácticas
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Herramientas" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">
+                Administrar prácticas
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Administrar discentes
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">
+                Administrar módulos
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item as={NavLink} to="/acercade">
+                Acerca de...
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
