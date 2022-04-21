@@ -45,7 +45,7 @@ const Menu = () => {
               <NavDropdown.Item href="#action/3.2">
                 Administrar discentes
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
+              <NavDropdown.Item as={NavLink} to="/modulos">
                 Administrar módulos
               </NavDropdown.Item>
               <NavDropdown.Divider />

@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
 import Cabecera from "./components/Cabecera";
+import HomePagina from "./pages/HomePagina";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Container, Row, Col } from "react-bootstrap";
-import AcercaDe from "./pages/AcercaDe.js";
+import AcercaDePagina from "./pages/AcercaDePagina.js";
 import Pie from "./components/Pie";
+import ModulosPagina from "./pages/ModulosPagina";
+import { ModuloProveedor } from "./contexts/ModuloContext";
 
 function App() {
   return (
@@ -21,8 +23,16 @@ function App() {
         <Row>
           <Col>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/acercade" element={<AcercaDe />} />
+              <Route path="/" element={<HomePagina />} />
+              <Route
+                path="/modulos"
+                element={
+                  <ModuloProveedor>
+                    <ModulosPagina />
+                  </ModuloProveedor>
+                }
+              />
+              <Route path="/acercade" element={<AcercaDePagina />} />
               {/*   <Route path="/add" element={<AddPractica />} />
               <Route path="/addnota" element={<AddNota />} />
               <Route path="/view/:id" element={<View />} /> */}
