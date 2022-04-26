@@ -10,7 +10,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-const ModuloContext = createContext();
+const NotasContext = createContext();
 const valorInicial = "";
 const valoresIniciales = {
   nombre: "",
@@ -20,9 +20,10 @@ const valoresIniciales = {
   practicas: [{}],
 };
 
-const ModuloProveedor = (props) => {
+const NotasProveedor = (props) => {
   const [idModulo, setIdModulo] = useState(valorInicial);
   const [modulos, setModulos] = useState("");
+  const [modulo, setModulo] = useState(valoresIniciales);
 
   const obtenerModulos = async () => {
     await onSnapshot(collection(basedatos, "modulos"), (modulosListado) => {
@@ -46,15 +47,17 @@ const ModuloProveedor = (props) => {
     valoresIniciales,
     modulos,
     setModulos,
+    modulo,
+    setModulo,
     obtenerModulos,
   };
 
   return (
-    <ModuloContext.Provider value={datos}>
+    <NotasContext.Provider value={datos}>
       {props.children}
-    </ModuloContext.Provider>
+    </NotasContext.Provider>
   );
 };
 
-export default ModuloContext;
-export { ModuloProveedor };
+export default NotasContext;
+export { NotasProveedor };

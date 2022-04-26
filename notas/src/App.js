@@ -9,43 +9,40 @@ import { Container, Row, Col } from "react-bootstrap";
 import AcercaDePagina from "./pages/AcercaDePagina.js";
 import Pie from "./components/Pie";
 import ModulosPagina from "./pages/ModulosPagina";
-import { ModuloProveedor } from "./contexts/ModuloContext";
+import { NotasProveedor } from "./estado/notasContext";
+import DiscentesPagina from "./pages/DiscentesPagina";
 
 function App() {
   return (
-    <Container fluid>
-      <BrowserRouter>
-        <Row></Row>
-        <Col>
-          <ToastContainer position="top-right" />
-          <Cabecera />
-        </Col>
-        <Row>
+    <NotasProveedor>
+      <Container fluid>
+        <BrowserRouter>
+          <Row></Row>
           <Col>
-            <Routes>
-              <Route path="/" element={<HomePagina />} />
-              <Route
-                path="/modulos"
-                element={
-                  <ModuloProveedor>
-                    <ModulosPagina />
-                  </ModuloProveedor>
-                }
-              />
-              <Route path="/acercade" element={<AcercaDePagina />} />
-              {/*   <Route path="/add" element={<AddPractica />} />
-              <Route path="/addnota" element={<AddNota />} />
-              <Route path="/view/:id" element={<View />} /> */}
-              {/* <Route path="/view/:param1/:param2/:param3" element={<View />} /> para varios parámetros */}
-            </Routes>
+            <ToastContainer position="top-right" />
+            <Cabecera />
           </Col>
-        </Row>
-        <Row>
-          <Pie />
-        </Row>
-      </BrowserRouter>
-      {/* <div className="App"></div> */}
-    </Container>
+          <Row>
+            <Col>
+              <Routes>
+                <Route path="/" element={<HomePagina />} />
+                <Route path="/discentes" element={<DiscentesPagina />} />
+                <Route path="/modulos" element={<ModulosPagina />} />
+                <Route path="/acercade" element={<AcercaDePagina />} />
+                {/*   <Route path="/add" element={<AddPractica />} />
+              <Route path="/addnota" element={<AddNota />} />
+            <Route path="/view/:id" element={<View />} /> */}
+                {/* <Route path="/view/:param1/:param2/:param3" element={<View />} /> para varios parámetros */}
+              </Routes>
+            </Col>
+          </Row>
+          <Row>
+            <Pie />
+          </Row>
+        </BrowserRouter>
+        {/* <div className="App"></div> */}
+      </Container>
+    </NotasProveedor>
   );
 }
 

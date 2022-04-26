@@ -15,14 +15,14 @@ import {
   getDocs,
   onSnapshot,
 } from "firebase/firestore";
-import ModuloContext from "../contexts/ModuloContext.js";
+import NotasContext from "../estado/notasContext.js";
 
 function ModulosPagina() {
   /*
    *   Contexto
    */
 
-  const { idModulo, setIdModulo, valorInicial } = useContext(ModuloContext);
+  const { idModulo, setIdModulo, valorInicial } = useContext(NotasContext);
 
   // Esta función tiene que estar fuera del componente <ModuloForm> ya que tiene que manejar el estado idModulo.
   // Este estado es el encargado de actualizar el formulario en función de los el estado idModulo.

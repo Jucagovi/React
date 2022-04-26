@@ -2,12 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Container, Table, Button } from "react-bootstrap";
 import Modulo from "./Modulo.js";
 import Cargando from "./Cargando.js";
-
-import { toast } from "react-toastify";
-import ModuloContext from "../contexts/ModuloContext.js";
+import NotasContext from "../estado/notasContext.js";
 
 const Modulos = (props) => {
-  const contexto = useContext(ModuloContext);
+  const contexto = useContext(NotasContext);
 
   useEffect(() => {
     contexto.obtenerModulos();

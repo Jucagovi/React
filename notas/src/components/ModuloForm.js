@@ -10,10 +10,9 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import ModuloContext from "../contexts/ModuloContext.js";
+import NotasContext from "../estado/notasContext.js";
 const ModuloForm = (props) => {
-  const contexto = useContext(ModuloContext);
-  const [modulo, setModulo] = useState({ ...contexto.valoresIniciales });
+  const { modulo, setModulo, valoresIniciales } = useContext(NotasContext);
 
   // Usando contextos
 
@@ -43,7 +42,7 @@ const ModuloForm = (props) => {
     if (props.id) {
       obtenerModulo(props.id);
     } else {
-      setModulo({ ...contexto.valoresIniciales });
+      setModulo({ ...valoresIniciales });
     }
   }, [props.id]);
 
@@ -85,7 +84,7 @@ const ModuloForm = (props) => {
           type="button"
           onClick={() => {
             props.funcionClick(modulo);
-            setModulo({ ...contexto.valoresIniciales });
+            setModulo({ ...valoresIniciales });
           }}
         >
           {props.id ? "Actualizar módulo" : "Guardar módulo"}
@@ -98,7 +97,7 @@ const ModuloForm = (props) => {
               // La función eliminarModulo() devuelve true o false para poder inicializar los valores del estado
               // y reiniciar el formulario. Esto ocurre si el usuario pulsa cancelar en el mensaje del prompt.
               if (!props.funcionBorrar(props.id)) {
-                setModulo({ ...contexto.valoresIniciales });
+                setModulo({ ...valoresIniciales });
               }
             }}
           >

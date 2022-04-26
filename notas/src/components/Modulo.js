@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
-import ModuloContext from "../contexts/ModuloContext";
+import NotasContext from "../estado/notasContext";
 import "./Modulo.css";
 
 const Modulo = (props) => {
-  const contexto = useContext(ModuloContext);
+  const contexto = useContext(NotasContext);
   return (
     <React.Fragment>
       <tr className="modulotr">
