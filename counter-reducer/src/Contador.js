@@ -3,8 +3,7 @@ import types from "./types";
 import { ContextoContadores } from "./Contexto";
 
 const Contador = () => {
-  const { idPrueba, funcionPrueba, contador, contadorDispatch } =
-    useContext(ContextoContadores);
+  const { contador, contadorDispatch } = useContext(ContextoContadores);
 
   return (
     <React.Fragment>
@@ -12,7 +11,6 @@ const Contador = () => {
         <h2>Clicks: {contador}</h2>
         <button
           onClick={(e) => {
-            console.log(idPrueba);
             contadorDispatch({
               type: types.aumentar,
               payload: e.target.outerHTML,
@@ -40,13 +38,6 @@ const Contador = () => {
           }}
         >
           Reiniciar
-        </button>
-        <button
-          onClick={(e) => {
-            funcionPrueba(e.target.textContent);
-          }}
-        >
-          Prueba de contexto
         </button>
       </div>
     </React.Fragment>
