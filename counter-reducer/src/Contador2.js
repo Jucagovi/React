@@ -1,11 +1,9 @@
-import React, { useReducer } from "react";
-import contador2Reducer, { estadoInicial2, types } from "./contador2Reducer";
+import React, { useContext, useReducer } from "react";
+import types from "./types";
+import Contexto, { ContextoContadores } from "./Contexto";
 
 const Contador2 = () => {
-  const [contador2, contador2Dispatch] = useReducer(
-    contador2Reducer,
-    estadoInicial2
-  );
+  const { contador2, contador2Dispatch } = useContext(ContextoContadores);
   return (
     <React.Fragment>
       <div>

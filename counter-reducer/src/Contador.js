@@ -1,11 +1,10 @@
-import React, { useReducer } from "react";
-import contadorReducer, { estadoInicial, types } from "./contadorReducer";
+import React, { useContext } from "react";
+import types from "./types";
+import { ContextoContadores } from "./Contexto";
 
 const Contador = () => {
-  const [contador, contadorDispatch] = useReducer(
-    contadorReducer,
-    estadoInicial
-  );
+  const { idPrueba, funcionPrueba, contador, contadorDispatch } =
+    useContext(ContextoContadores);
 
   return (
     <React.Fragment>
@@ -13,6 +12,7 @@ const Contador = () => {
         <h2>Clicks: {contador}</h2>
         <button
           onClick={(e) => {
+            console.log(idPrueba);
             contadorDispatch({
               type: types.aumentar,
               payload: e.target.outerHTML,
@@ -40,6 +40,13 @@ const Contador = () => {
           }}
         >
           Reiniciar
+        </button>
+        <button
+          onClick={(e) => {
+            funcionPrueba(e.target.textContent);
+          }}
+        >
+          Prueba de contexto
         </button>
       </div>
     </React.Fragment>

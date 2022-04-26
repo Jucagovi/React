@@ -1,10 +1,5 @@
+import types from "./types";
 const estadoInicial = 0;
-
-const types = {
-  aumentar: "aumentar",
-  disminuir: "disminuir",
-  reiniciar: "reiniciar",
-};
 
 const contadorReducer = (estadoPrevio, accion) => {
   switch (accion.type) {
