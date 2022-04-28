@@ -21,9 +21,20 @@ const valoresIniciales = {
 };
 
 const NotasProveedor = (props) => {
+  /**************************************
+   * Estados para <ModulosPagina />
+   ***************************************/
   const [idModulo, setIdModulo] = useState(valorInicial);
   const [modulos, setModulos] = useState("");
   const [modulo, setModulo] = useState(valoresIniciales);
+
+  /**************************************
+   * Estados para <DiscentesPagina />
+   ***************************************/
+
+  /**************************************
+   * Funciones a ordenar
+   ***************************************/
 
   const obtenerModulos = async () => {
     await onSnapshot(collection(basedatos, "modulos"), (modulosListado) => {
