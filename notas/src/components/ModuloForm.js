@@ -10,9 +10,9 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import NotasContext from "../estado/notasContext.js";
+import ModuloContext from "../contextos/modulosContext.js";
 const ModuloForm = (props) => {
-  const { modulo, setModulo, valoresIniciales } = useContext(NotasContext);
+  const { modulo, setModulo, valoresIniciales } = useContext(ModuloContext);
 
   // Usando contextos
 

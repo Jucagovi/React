@@ -10,7 +10,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-const NotasContext = createContext();
+const ModulosContext = createContext();
 const valorInicial = "";
 const valoresIniciales = {
   nombre: "",
@@ -20,17 +20,13 @@ const valoresIniciales = {
   practicas: [{}],
 };
 
-const NotasProveedor = (props) => {
+const ModulosProveedor = (props) => {
   /**************************************
    * Estados para <ModulosPagina />
    ***************************************/
   const [idModulo, setIdModulo] = useState(valorInicial);
   const [modulos, setModulos] = useState("");
   const [modulo, setModulo] = useState(valoresIniciales);
-
-  /**************************************
-   * Estados para <DiscentesPagina />
-   ***************************************/
 
   /**************************************
    * Funciones a ordenar
@@ -44,14 +40,7 @@ const NotasProveedor = (props) => {
     });
   };
 
-  const prueba = "Fea";
-  const funPrueba = () => {
-    console.log("Esto es la función prueba");
-  };
-
   const datos = {
-    prueba,
-    funPrueba,
     idModulo,
     setIdModulo,
     valorInicial,
@@ -64,11 +53,11 @@ const NotasProveedor = (props) => {
   };
 
   return (
-    <NotasContext.Provider value={datos}>
+    <ModulosContext.Provider value={datos}>
       {props.children}
-    </NotasContext.Provider>
+    </ModulosContext.Provider>
   );
 };
 
-export default NotasContext;
-export { NotasProveedor };
+export default ModulosContext;
+export { ModulosProveedor };

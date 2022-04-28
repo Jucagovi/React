@@ -9,12 +9,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import AcercaDePagina from "./pages/AcercaDePagina.js";
 import Pie from "./components/Pie";
 import ModulosPagina from "./pages/ModulosPagina";
-import { NotasProveedor } from "./estado/notasContext";
 import DiscentesPagina from "./pages/DiscentesPagina";
+import { ModulosProveedor } from "./contextos/modulosContext";
 
 function App() {
   return (
-    <NotasProveedor>
+    <ModulosProveedor>
       <Container fluid>
         <BrowserRouter>
           <Row></Row>
@@ -42,7 +42,7 @@ function App() {
         </BrowserRouter>
         {/* <div className="App"></div> */}
       </Container>
-    </NotasProveedor>
+    </ModulosProveedor>
   );
 }
 
