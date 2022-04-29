@@ -1,15 +1,17 @@
 import React, { useReducer } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Discentes from "../components/Discentes";
-import Modulos from "../components/Modulos";
+import DiscentesModulos from "../components/DiscentesModulos";
 
 const DiscentesPagina = () => {
+  const obtenerModulos = () => {};
+
   return (
     <React.Fragment>
       <Container>
         <Row>
           <Col>
-            <h2>LIstado módulos</h2>
+            <DiscentesModulos />
           </Col>
         </Row>
         <Row>

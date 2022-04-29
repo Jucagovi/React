@@ -17,7 +17,7 @@ import {
 } from "firebase/firestore";
 import ModuloContext from "../contextos/modulosContext.js";
 
-function ModulosPagina() {
+const ModulosPagina = () => {
   /*
    *   Contexto
    */
@@ -84,6 +84,6 @@ function ModulosPagina() {
       </Container>
     </React.Fragment>
   );
-}
+};
 
 export default ModulosPagina;

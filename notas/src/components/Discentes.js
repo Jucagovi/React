@@ -13,7 +13,6 @@ const Discentes = () => {
     const discentesModulo = await getDoc(
       doc(collection(basedatos, "modulos"), id)
     );
-    console.log(discentesModulo.data().discentes);
     setDiscentes(discentesModulo.data().discentes);
 
     /* await onSnapshot(collection(basedatos, "modulos"), (discentesListado) => {
