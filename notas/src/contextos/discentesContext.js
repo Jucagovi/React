@@ -2,10 +2,10 @@ import { Children, createContext } from "react";
 
 const DiscentesContexto = createContext();
 
-valorInicial = "";
-valoresIniciales = {};
+const valorInicial = "";
+const valoresIniciales = {};
 
-const DiscentesProveedor = () => {
+const DiscentesProveedor = (props) => {
   const datos = {};
 
   return (
@@ -15,5 +15,5 @@ const DiscentesProveedor = () => {
   );
 };
 
-export { DiscentesContexto };
+export { DiscentesProveedor };
 export default DiscentesContexto;

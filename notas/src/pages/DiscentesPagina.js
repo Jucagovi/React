@@ -10,7 +10,6 @@ const DiscentesPagina = () => {
         <Row>
           <Col>
             <h2>LIstado módulos</h2>
-            <Modulos />
           </Col>
         </Row>
         <Row>

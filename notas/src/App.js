@@ -11,10 +11,11 @@ import Pie from "./components/Pie";
 import ModulosPagina from "./pages/ModulosPagina";
 import DiscentesPagina from "./pages/DiscentesPagina";
 import { ModulosProveedor } from "./contextos/modulosContext";
+import { DiscentesProveedor } from "./contextos/discentesContext";
 
 function App() {
   return (
-    <ModulosProveedor>
+    <React.Fragment>
       <Container fluid>
         <BrowserRouter>
           <Row></Row>
@@ -26,8 +27,22 @@ function App() {
             <Col>
               <Routes>
                 <Route path="/" element={<HomePagina />} />
-                <Route path="/discentes" element={<DiscentesPagina />} />
-                <Route path="/modulos" element={<ModulosPagina />} />
+                <Route
+                  path="/discentes"
+                  element={
+                    <DiscentesProveedor>
+                      <DiscentesPagina />
+                    </DiscentesProveedor>
+                  }
+                />
+                <Route
+                  path="/modulos"
+                  element={
+                    <ModulosProveedor>
+                      <ModulosPagina />
+                    </ModulosProveedor>
+                  }
+                />
                 <Route path="/acercade" element={<AcercaDePagina />} />
                 {/*   <Route path="/add" element={<AddPractica />} />
               <Route path="/addnota" element={<AddNota />} />
@@ -42,7 +57,7 @@ function App() {
         </BrowserRouter>
         {/* <div className="App"></div> */}
       </Container>
-    </ModulosProveedor>
+    </React.Fragment>
   );
 }
 
