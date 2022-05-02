@@ -1,10 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import DiscenteForm from "../components/DiscenteForm";
 import Discentes from "../components/Discentes";
 import DiscentesModulos from "../components/DiscentesModulos";
+import DiscentesContexto from "../contextos/discentesContext";
 
 const DiscentesPagina = () => {
-  const obtenerModulos = () => {};
+  const { discentes } = useContext(DiscentesContexto);
 
   return (
     <React.Fragment>
@@ -15,12 +17,16 @@ const DiscentesPagina = () => {
           </Col>
         </Row>
         <Row>
-          <Col sm={5}>
+          <Col sm={4}>
             <h2>LIstado de discnetes</h2>
             <Discentes />
           </Col>
-          <Col sm={7}>
-            <h2>Formulario discentes</h2>
+          <Col sm={8}>
+            {discentes ? (
+              <DiscenteForm />
+            ) : (
+              <h3>No se ha seleccionado un modulo todavía.</h3>
+            )}
           </Col>
         </Row>
       </Container>

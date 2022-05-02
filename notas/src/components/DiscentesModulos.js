@@ -14,7 +14,13 @@ const DiscentesModulos = () => {
     <React.Fragment>
       {modulos !== null ? (
         modulos.map((modulo) => {
-          return <DiscentesModulo key={modulo.id} datos={modulo.data()} />;
+          return (
+            <DiscentesModulo
+              key={modulo.id}
+              id={modulo.id}
+              datos={modulo.data()}
+            />
+          );
         })
       ) : (
         <Cargando />

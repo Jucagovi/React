@@ -7,12 +7,10 @@ const DiscentesModulo = (props) => {
   const { datos, id } = props;
   return (
     <React.Fragment>
-      <div className="botonModulo" key={id}>
+      <div className="botonModulo" key={id} id={id}>
         <Button
-          id={id}
           onClick={(e) => {
-            console.log(e.target.id);
-            setIdModulo(e.target.id);
+            setIdModulo(id);
           }}
         >
           {datos.curso} {datos.abreviatura}

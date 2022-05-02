@@ -1,13 +1,12 @@
 import { collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import DiscentesContexto from "../contextos/discentesContext";
 import { basedatos } from "../firebase";
 import Discente from "./Discente";
 
-const discentesIniciales = null;
-
 const Discentes = () => {
-  const [discentes, setDiscentes] = useState(discentesIniciales);
+  const { idModulo, discentes, setDiscentes } = useContext(DiscentesContexto);
 
   const obtenerDiscentes = async (id) => {
     const discentesModulo = await getDoc(
@@ -23,24 +22,29 @@ const Discentes = () => {
     }); */
   };
 
+  useEffect(() => {
+    if (idModulo) {
+      obtenerDiscentes(idModulo);
+    }
+  }, [idModulo]);
+
   return (
     <React.Fragment>
       <Container>
         <Row>
           <Col>
-            {/* <Button
-              onClick={() => {
-                obtenerDiscentes(idModulo);
-              }}
-            >
-              xxx
-            </Button> */}
             {discentes !== null ? (
               discentes.map((discente) => {
-                return <Discente datos={discente} />;
+                return (
+                  <Discente
+                    key={discente.id}
+                    id={discente.id}
+                    datos={discente}
+                  />
+                );
               })
             ) : (
-              <p>No se ha selccionado un módulo todavía.</p>
+              <p>No se ha seleccionado un módulo todavía.</p>
             )}
           </Col>
         </Row>
