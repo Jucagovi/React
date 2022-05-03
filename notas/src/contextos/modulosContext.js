@@ -16,8 +16,8 @@ const valoresIniciales = {
   nombre: "",
   abreviatura: "",
   curso: "",
-  discentes: [{}],
-  practicas: [{}],
+  discentes: [],
+  practicas: [],
 };
 
 const ModulosProveedor = (props) => {

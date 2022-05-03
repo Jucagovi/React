@@ -1,25 +1,23 @@
-import { collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
+import { collection, doc, onSnapshot, Timestamp } from "firebase/firestore";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import DiscentesContexto from "../contextos/discentesContext";
 import { basedatos } from "../firebase";
 import Discente from "./Discente";
 
 const Discentes = () => {
-  const { idModulo, discentes, setDiscentes } = useContext(DiscentesContexto);
+  const { idModulo, discentes, setDiscentes, setIdDiscente, setDiscente } =
+    useContext(DiscentesContexto);
 
   const obtenerDiscentes = async (id) => {
-    const discentesModulo = await getDoc(
+    /* const discentesModulo = await getDoc(
       doc(collection(basedatos, "modulos"), id)
     );
-    setDiscentes(discentesModulo.data().discentes);
+    setDiscentes(discentesModulo.data().discentes); */
 
-    /* await onSnapshot(collection(basedatos, "modulos"), (discentesListado) => {
-      discentesListado.docs.map((doc) => {
-        console.log(doc.data().discentes.length);
-        console.log(idModulo);
-      });
-    }); */
+    await onSnapshot(doc(collection(basedatos, "modulos"), id), (doc) => {
+      setDiscentes(doc.data().discentes);
+    });
   };
 
   useEffect(() => {
@@ -46,6 +44,25 @@ const Discentes = () => {
             ) : (
               <p>No se ha seleccionado un módulo todavía.</p>
             )}
+            <p>
+              {idModulo && (
+                <Button
+                  onClick={() => {
+                    setIdDiscente(null);
+                    //De esta forma se genera un nuevo "id" para el estado "discente".
+                    setDiscente({
+                      id: Timestamp.now().toMillis() % 1000000,
+                      nombre: "",
+                      apellidos: "",
+                      repetidor: "",
+                      notas: [],
+                    });
+                  }}
+                >
+                  Añadir discente
+                </Button>
+              )}
+            </p>
           </Col>
         </Row>
       </Container>

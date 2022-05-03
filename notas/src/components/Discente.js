@@ -3,14 +3,24 @@ import { Button } from "react-bootstrap";
 import DiscentesContexto from "../contextos/discentesContext";
 
 const Discente = (props) => {
-  const { idDiscente, setIdDiscente } = useContext(DiscentesContexto);
+  const { idDiscente, setIdDiscente, discente, setDiscente, discentes } =
+    useContext(DiscentesContexto);
   const { id, datos } = props;
+
+  /* const cambiarEstado = () => {
+    console.log(`idDiscente -> ${idDiscente}`);
+    const nuevo = discentes.find((elemento) => elemento.id === idDiscente);
+    if (nuevo) {
+      setDiscente(nuevo);
+    }
+  }; */
+
   return (
     <React.Fragment>
       <Button
         onClick={() => {
           setIdDiscente(id);
-          console.log(idDiscente);
+          //cambiarEstado(id);
         }}
         key={datos.id}
       >
