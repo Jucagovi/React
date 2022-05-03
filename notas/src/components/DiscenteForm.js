@@ -6,12 +6,12 @@ import DiscentesContexto from "../contextos/discentesContext";
 const DiscenteForm = (props) => {
   const {
     idDiscente,
-    setIdDiscente,
     discente,
     setDiscente,
     discentes,
     enviarForm,
     discenteInicial,
+    borrarDiscente,
   } = useContext(DiscentesContexto);
 
   const cambiarEstado = (e) => {
@@ -76,7 +76,13 @@ const DiscenteForm = (props) => {
           {idDiscente ? "Actualizar discente" : "Guardar discente"}
         </Button>
         {idDiscente && (
-          <Button variant="danger" type="button">
+          <Button
+            onClick={() => {
+              borrarDiscente();
+            }}
+            variant="danger"
+            type="button"
+          >
             Borrar discente
           </Button>
         )}

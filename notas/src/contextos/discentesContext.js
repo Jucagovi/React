@@ -42,22 +42,26 @@ const DiscentesProveedor = (props) => {
       toast.error("Faltan valores obligatorios.");
     } else {
       if (idDiscente) {
-        /* await updateDoc(doc(collection(basedatos, "modulos"), idModulo), datos);
-        toast.info("Documento actualizado correctamente.");
-        setIdModulo(null); */
-      } else {
-        /* La actualización de forma ordenada:  
-        const coleccion = collection(basedatos, "modulos");
-        const referencia = doc(coleccion, idModulo);
-        const resultado = await updateDoc(referencia, {
-          discentes: arrayUnion(discente),
-        }); */
+        const nuevosDiscentes = discentes.map((d) => {
+          if (d.id === discente.id) {
+            return discente;
+          } else {
+            return d;
+          }
+        });
 
+        setDiscentes(nuevosDiscentes);
+        const resultado = await updateDoc(
+          doc(collection(basedatos, "modulos"), idModulo),
+          {
+            discentes: nuevosDiscentes,
+          }
+        );
+      } else {
         const resultado = await updateDoc(
           doc(collection(basedatos, "modulos"), idModulo),
           { discentes: arrayUnion(discente) }
         );
-        //const resultado = await addDoc(collection(basedatos, "modulos"), datos);
 
         toast.info(
           `Discente ${discente.nombre} guardado con el id ${discente.id}`
@@ -75,6 +79,27 @@ const DiscentesProveedor = (props) => {
     }
   };
 
+  const borrarDiscente = async () => {
+    if (window.confirm(`¿Estás seguro de querer eliminar al discente?`)) {
+      const nuevosDiscentes = discentes.filter((d) => d.id !== idDiscente);
+      setDiscentes(nuevosDiscentes);
+      const resultado = await updateDoc(
+        doc(collection(basedatos, "modulos"), idModulo),
+        { discentes: nuevosDiscentes }
+      );
+      setDiscente({
+        id: Timestamp.now().toMillis() % 1000000,
+        nombre: "",
+        apellidos: "",
+        repetidor: "",
+        notas: [],
+      });
+      setIdDiscente(null);
+    }
+  };
+
+  const actualizarDiscente = async () => {};
+
   const obtenerDiscente = async () => {};
   const datos = {
     obtenerModulos,
@@ -90,6 +115,8 @@ const DiscentesProveedor = (props) => {
     setDiscente,
     enviarForm,
     discenteInicial,
+    borrarDiscente,
+    actualizarDiscente,
   };
   return (
     <DiscentesContexto.Provider value={datos}>

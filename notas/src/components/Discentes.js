@@ -10,11 +10,6 @@ const Discentes = () => {
     useContext(DiscentesContexto);
 
   const obtenerDiscentes = async (id) => {
-    /* const discentesModulo = await getDoc(
-      doc(collection(basedatos, "modulos"), id)
-    );
-    setDiscentes(discentesModulo.data().discentes); */
-
     await onSnapshot(doc(collection(basedatos, "modulos"), id), (doc) => {
       setDiscentes(doc.data().discentes);
     });
