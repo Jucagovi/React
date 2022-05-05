@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 import PracticasContexto from "../contextos/practicasContexto";
 
 const PracticasModulo = (props) => {
-  const { idModulo, setIdModulo } = useContext(PracticasContexto);
+  const { idModulo, setIdModulo, setIdPractica } =
+    useContext(PracticasContexto);
   const { datos, id } = props;
   return (
     <React.Fragment>
@@ -11,6 +12,7 @@ const PracticasModulo = (props) => {
         <Button
           onClick={() => {
             setIdModulo(id);
+            setIdPractica(null);
           }}
         >
           {datos.curso} {datos.abreviatura}

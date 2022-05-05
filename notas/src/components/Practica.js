@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
+import { acortar } from "../bibliotecas/funciones";
 import PracticasContexto from "../contextos/practicasContexto";
 
 const Practica = (props) => {
@@ -14,7 +15,7 @@ const Practica = (props) => {
         }}
         key={datos.id}
       >
-        {datos.numero} {datos.titulo}
+        {datos.numero} {acortar(datos.titulo, 15)}
       </Button>
     </React.Fragment>
   );

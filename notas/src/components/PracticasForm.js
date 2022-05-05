@@ -19,6 +19,7 @@ const PracticasForm = () => {
     } else {
       setPractica({ ...practica, [name]: value });
     }
+    console.log(practica.titulo.substr(0, 5));
   };
 
   useEffect(() => {

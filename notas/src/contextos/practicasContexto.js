@@ -8,12 +8,13 @@ import {
 } from "firebase/firestore";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
+import { aleatorio, construirPractica } from "../bibliotecas/funciones";
 import { basedatos } from "../firebase";
 
 const valoresIniciales = null;
 const valorInicial = null;
 const practicaInicial = {
-  id: Timestamp.now().toMillis() % 1000000,
+  id: aleatorio(6), //Timestamp.now().toMillis() % 1000000,
   evaluacion: 0,
   numero: "",
   orden: 0,
@@ -39,7 +40,6 @@ const PrcaticasProveedor = (props) => {
   const obtenerPracticas = async (id) => {
     await onSnapshot(doc(collection(basedatos, "modulos"), id), (doc) => {
       setPracticas(doc.data().practicas);
-      console.log(doc.data().practicas);
     });
   };
 
@@ -74,14 +74,7 @@ const PrcaticasProveedor = (props) => {
         );
         setIdPractica(null);
         // Se actualiza el estado "discente" con un nuevo "id" aleatorio.
-        setPractica({
-          id: Timestamp.now().toMillis() % 1000000,
-          evaluacion: 0,
-          numero: "",
-          orden: 0,
-          peso: 0,
-          titulo: "",
-        });
+        setPractica(construirPractica());
       }
     }
   };
@@ -94,14 +87,7 @@ const PrcaticasProveedor = (props) => {
         doc(collection(basedatos, "modulos"), idModulo),
         { practicas: nuevasPracticas }
       );
-      setPractica({
-        id: Timestamp.now().toMillis() % 1000000,
-        evaluacion: 0,
-        numero: "",
-        orden: 0,
-        peso: 0,
-        titulo: "",
-      });
+      setPractica(construirPractica());
       setIdPractica(null);
     }
   };
