@@ -1,51 +1,33 @@
-import { Timestamp } from "firebase/firestore";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Button, Form } from "react-bootstrap";
-import DiscentesContexto from "../contextos/discentesContext";
+import PracticasContexto from "../contextos/practicasContexto";
 
-const DiscenteForm = (props) => {
-  const {
-    idDiscente,
-    discente,
-    setDiscente,
-    discentes,
-    enviarForm,
-    discenteInicial,
-    borrarDiscente,
-  } = useContext(DiscentesContexto);
+export const PracticasForm = () => {
+  const { practica } = useContext(PracticasContexto);
 
   const cambiarEstado = (e) => {
     const { name, value } = e.target;
-    setDiscente({ ...discente, [name]: value });
-  };
-
-  const cargarDiscente = () => {
-    console.log(`idDiscente -> ${idDiscente}`);
-    const nuevo = discentes.find((elemento) => elemento.id === idDiscente);
-    if (nuevo) {
-      setDiscente(nuevo);
-    } else {
-      setDiscente(discenteInicial);
-    }
+    setPractica({ ...practica, [name]: value });
   };
 
   useEffect(() => {
-    cargarDiscente();
-  }, [idDiscente]);
+    cargarPractica();
+  }, [idPractica]);
 
   return (
     <React.Fragment>
       <Form>
         <Form.Group className="mb-3" controlId="nombre">
-          <Form.Label>Nombre discente</Form.Label>
+          <Form.Label>Título de la práctica</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
             type="text"
-            placeholder="Nombre del discente..."
-            name="nombre"
-            value={discente ? discente.nombre : ""}
+            placeholder="Título de la práctica..."
+            name="titulo"
+            value={practica ? practica.titulo : ""}
           />
         </Form.Group>
+        {/* CONTINUAR DESDE AQUÍ */}
         <Form.Group className="mb-3" controlId="abreviatura">
           <Form.Label>Apellidos discente</Form.Label>
           <Form.Control
@@ -87,9 +69,7 @@ const DiscenteForm = (props) => {
           </Button>
         )}
       </Form>
-      {/* <pre>{JSON.stringify(discente, null, 2)}</pre> */}
+      <pre>{JSON.stringify(practica, null, 2)}</pre>
     </React.Fragment>
   );
 };
-
-export default DiscenteForm;

@@ -1,23 +1,23 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import DiscentesContexto from "../contextos/discentesContext";
+import PracticasContexto from "../contextos/practicasContexto";
 
-const Discente = (props) => {
-  const { setIdDiscente } = useContext(DiscentesContexto);
+const Practica = (props) => {
+  const { setIdPractica } = useContext(PracticasContexto);
   const { id, datos } = props;
 
   return (
     <React.Fragment>
       <Button
         onClick={() => {
-          setIdDiscente(id);
+          setIdPractica(id);
         }}
         key={datos.id}
       >
-        {datos.nombre} {datos.apellidos} {datos.repetidor}
+        {datos.numero} {datos.titulo}
       </Button>
     </React.Fragment>
   );
 };
 
-export default Discente;
+export default Practica;

@@ -39,7 +39,7 @@ const Menu = () => {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Herramientas" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item as={NavLink} to="/practicas">
                 Administrar prácticas
               </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/discentes">
