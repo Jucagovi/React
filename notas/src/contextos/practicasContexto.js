@@ -1,4 +1,11 @@
-import { collection, doc, onSnapshot, Timestamp } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  onSnapshot,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { basedatos } from "../firebase";
@@ -37,7 +44,7 @@ const PrcaticasProveedor = (props) => {
   };
 
   const enviarForm = async () => {
-    if (!practica.nombre || !practica.apellidos || !practica.repetidor) {
+    if (!practica.titulo || !practica.numero) {
       toast.error("Faltan valores obligatorios.");
     } else {
       if (idPractica) {
@@ -82,7 +89,7 @@ const PrcaticasProveedor = (props) => {
   const borrarPractica = async () => {
     if (window.confirm(`¿Estás seguro de querer eliminar la práctica?`)) {
       const nuevasPracticas = practicas.filter((d) => d.id !== idPractica);
-      setDiscentes(nuevasPracticas);
+      setPracticas(nuevasPracticas);
       const resultado = await updateDoc(
         doc(collection(basedatos, "modulos"), idModulo),
         { practicas: nuevasPracticas }
@@ -100,12 +107,14 @@ const PrcaticasProveedor = (props) => {
   };
 
   const cargarPractica = () => {
-    console.log(`idPractica -> ${idPractica}`);
-    const nuevo = practicas.find((elemento) => elemento.id === idPractica);
-    if (nuevo) {
-      setPractica(nuevo);
-    } else {
-      setPractica(practicaInicial);
+    if (practicas) {
+      // Evito que "practicas" sea nulo al inicio.
+      const nuevo = practicas.find((elemento) => elemento.id === idPractica);
+      if (nuevo) {
+        setPractica(nuevo);
+      } else {
+        setPractica(practicaInicial);
+      }
     }
   };
 
@@ -124,6 +133,7 @@ const PrcaticasProveedor = (props) => {
     obtenerPracticas,
     enviarForm,
     borrarPractica,
+    cargarPractica,
   };
 
   return (

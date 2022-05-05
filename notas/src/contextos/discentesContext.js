@@ -125,5 +125,5 @@ const DiscentesProveedor = (props) => {
   );
 };
 
-export default DiscentesContexto;
 export { DiscentesProveedor };
+export default DiscentesContexto;

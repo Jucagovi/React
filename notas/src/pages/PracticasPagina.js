@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Practicas from "../components/Practicas";
+import PracticasForm from "../components/PracticasForm";
 import PracticasModulos from "../components/PracticasModulos";
 
 const PracticasPagina = () => {
@@ -17,7 +18,7 @@ const PracticasPagina = () => {
             <Practicas />
           </Col>
           <Col sm={9}>
-            <h3>formulario prácticas</h3>
+            <PracticasForm />
           </Col>
         </Row>
       </Container>

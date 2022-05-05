@@ -1,23 +1,46 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import PracticasContexto from "../contextos/practicasContexto";
 
-export const PracticasForm = () => {
-  const { practica } = useContext(PracticasContexto);
+const PracticasForm = () => {
+  const {
+    practica,
+    setPractica,
+    cargarPractica,
+    idPractica,
+    enviarForm,
+    borrarPractica,
+  } = useContext(PracticasContexto);
 
   const cambiarEstado = (e) => {
     const { name, value } = e.target;
-    setPractica({ ...practica, [name]: value });
+    if (name === "peso" || name === "orden") {
+      setPractica({ ...practica, [name]: Number(value) });
+    } else {
+      setPractica({ ...practica, [name]: value });
+    }
   };
 
   useEffect(() => {
-    cargarPractica();
+    if (practica) {
+      cargarPractica();
+    }
   }, [idPractica]);
 
   return (
     <React.Fragment>
       <Form>
-        <Form.Group className="mb-3" controlId="nombre">
+        <Form.Group className="mb-3" controlId="numero">
+          <Form.Label>Número de la práctica</Form.Label>
+          <Form.Control
+            onChange={cambiarEstado}
+            type="text"
+            placeholder="Número de la práctica..."
+            name="numero"
+            value={practica ? practica.numero : ""}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="titulo">
           <Form.Label>Título de la práctica</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
@@ -27,25 +50,34 @@ export const PracticasForm = () => {
             value={practica ? practica.titulo : ""}
           />
         </Form.Group>
-        {/* CONTINUAR DESDE AQUÍ */}
-        <Form.Group className="mb-3" controlId="abreviatura">
-          <Form.Label>Apellidos discente</Form.Label>
+        <Form.Group className="mb-3" controlId="peso">
+          <Form.Label>Peso</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
             type="text"
-            placeholder="Apellidos del discente..."
-            name="apellidos"
-            value={discente ? discente.apellidos : ""}
+            placeholder="Peso de la práctica..."
+            name="peso"
+            value={practica ? practica.peso : ""}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="curso">
-          <Form.Label>Repetidor</Form.Label>
+        <Form.Group className="mb-3" controlId="orden">
+          <Form.Label>Orden de la práctica</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
             type="text"
-            placeholder="Repetidor..."
-            name="repetidor"
-            value={discente ? discente.repetidor : ""}
+            placeholder="Orden de la práctica..."
+            name="orden"
+            value={practica ? practica.orden : ""}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="evaluacion">
+          <Form.Label>Evaluación</Form.Label>
+          <Form.Control
+            onChange={cambiarEstado}
+            type="text"
+            placeholder="Evaluación de la práctica..."
+            name="evaluacion"
+            value={practica ? practica.evaluacion : ""}
           />
         </Form.Group>
         <Button
@@ -55,17 +87,17 @@ export const PracticasForm = () => {
           variant="primary"
           type="button"
         >
-          {idDiscente ? "Actualizar discente" : "Guardar discente"}
+          {idPractica ? "Actualizar práctica" : "Guardar práctica"}
         </Button>
-        {idDiscente && (
+        {idPractica && (
           <Button
             onClick={() => {
-              borrarDiscente();
+              borrarPractica();
             }}
             variant="danger"
             type="button"
           >
-            Borrar discente
+            Borrar práctica
           </Button>
         )}
       </Form>
@@ -73,3 +105,5 @@ export const PracticasForm = () => {
     </React.Fragment>
   );
 };
+
+export default PracticasForm;
