@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Container, Table, Button } from "react-bootstrap";
-import Modulo from "./Modulo.js";
-import Cargando from "./Cargando.js";
-import ModulosContext from "../contextos/modulosContext.js";
+import ModulosContext from "../../../contextos/modulosContext";
+import Cargando from "../../Cargando";
+import Modulo from "./Modulo";
 
 const Modulos = (props) => {
   const contexto = useContext(ModulosContext);

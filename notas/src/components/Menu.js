@@ -19,14 +19,11 @@ const Menu = () => {
             <Nav.Link as={NavLink} to="/">
               Inicio
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/addnota">
-              Discentes
-            </Nav.Link>
-            <NavDropdown title="Prácticas" id="basic-nav-dropdown">
+            <NavDropdown title="Notas" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
                 Informe resumen
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item as={NavLink} to="/notas">
                 Inserción de notas
               </NavDropdown.Item>
             </NavDropdown>

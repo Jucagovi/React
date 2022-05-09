@@ -1,8 +1,9 @@
 import { Timestamp } from "firebase/firestore";
 import React, { useContext, useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import PracticasContexto from "../contextos/practicasContexto";
+import PracticasContexto from "../../../contextos/practicasContexto";
 import Practica from "./Practica";
+import { construirPractica } from "../../../bibliotecas/funciones";
 
 const Practicas = () => {
   const { practicas, idModulo, setIdPractica, setPractica, obtenerPracticas } =
@@ -32,14 +33,15 @@ const Practicas = () => {
                   onClick={() => {
                     setIdPractica(null);
                     //De esta forma se genera un nuevo "id" para el estado "practica".
-                    setPractica({
+                    /*  setPractica({
                       id: Timestamp.now().toMillis() % 1000000,
                       evaluacion: 0,
                       numero: "",
                       orden: 0,
                       peso: 0,
                       titulo: "",
-                    });
+                    }); */
+                    setPractica(construirPractica());
                   }}
                 >
                   Añadir práctica

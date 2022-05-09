@@ -1,7 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 import React, { useContext, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import DiscentesContexto from "../contextos/discentesContext";
+import DiscentesContexto from "../../../contextos/discentesContext";
 
 const DiscenteForm = (props) => {
   const {

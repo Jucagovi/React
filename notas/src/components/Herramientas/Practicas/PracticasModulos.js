@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import PracticasContexto from "../contextos/practicasContexto";
-import Cargando from "./Cargando";
+import PracticasContexto from "../../../contextos/practicasContexto";
+import Cargando from "../../Cargando";
 import PracticasModulo from "./PracticasModulo";
 
 const PracticasModulos = () => {

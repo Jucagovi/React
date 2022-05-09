@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import DiscentesContexto from "../contextos/discentesContext";
-import Cargando from "./Cargando";
+import DiscentesContexto from "../../../contextos/discentesContext";
+import Cargando from "../../Cargando";
 import DiscentesModulo from "./DiscentesModulo";
 
 const DiscentesModulos = () => {

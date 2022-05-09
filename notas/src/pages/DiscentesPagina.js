@@ -1,8 +1,8 @@
 import React, { useContext, useReducer } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import DiscenteForm from "../components/DiscenteForm";
-import Discentes from "../components/Discentes";
-import DiscentesModulos from "../components/DiscentesModulos";
+import DiscenteForm from "../components/Herramientas/Discentes/DiscenteForm";
+import Discentes from "../components/Herramientas/Discentes/Discentes";
+import DiscentesModulos from "../components/Herramientas/Discentes/DiscentesModulos";
 import DiscentesContexto from "../contextos/discentesContext";
 
 const DiscentesPagina = () => {

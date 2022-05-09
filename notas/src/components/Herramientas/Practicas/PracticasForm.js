@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import PracticasContexto from "../contextos/practicasContexto";
+import PracticasContexto from "../../../contextos/practicasContexto";
 
 const PracticasForm = () => {
   const {
@@ -19,7 +19,6 @@ const PracticasForm = () => {
     } else {
       setPractica({ ...practica, [name]: value });
     }
-    console.log(practica.titulo.substr(0, 5));
   };
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const PracticasForm = () => {
           <Form.Label>Peso</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
-            type="text"
+            type="number"
             placeholder="Peso de la práctica..."
             name="peso"
             value={practica ? practica.peso : ""}
@@ -65,7 +64,7 @@ const PracticasForm = () => {
           <Form.Label>Orden de la práctica</Form.Label>
           <Form.Control
             onChange={cambiarEstado}
-            type="text"
+            type="number"
             placeholder="Orden de la práctica..."
             name="orden"
             value={practica ? practica.orden : ""}
@@ -102,7 +101,7 @@ const PracticasForm = () => {
           </Button>
         )}
       </Form>
-      <pre>{JSON.stringify(practica, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(practica, null, 2)}</pre> */}
     </React.Fragment>
   );
 };

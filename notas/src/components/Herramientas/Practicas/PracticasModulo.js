@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import PracticasContexto from "../contextos/practicasContexto";
+import PracticasContexto from "../../../contextos/practicasContexto";
 
 const PracticasModulo = (props) => {
   const { idModulo, setIdModulo, setIdPractica } =

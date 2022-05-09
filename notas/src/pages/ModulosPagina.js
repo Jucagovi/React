@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import ModuloForm from "../components/ModuloForm.js";
-import Modulos from "../components/Modulos.js";
-import { basedatos } from "../firebase.js";
+
 import {
   doc,
   addDoc,
@@ -15,14 +13,17 @@ import {
   getDocs,
   onSnapshot,
 } from "firebase/firestore";
-import ModuloContext from "../contextos/modulosContext.js";
+import ModulosContext from "../contextos/modulosContext";
+import { basedatos } from "../firebase";
+import Modulos from "../components/Herramientas/Modulos/Modulos";
+import ModuloForm from "../components/Herramientas/Modulos/ModuloForm";
 
 const ModulosPagina = () => {
   /*
    *   Contexto
    */
 
-  const { idModulo, setIdModulo, valorInicial } = useContext(ModuloContext);
+  const { idModulo, setIdModulo, valorInicial } = useContext(ModulosContext);
 
   // Esta función tiene que estar fuera del componente <ModuloForm> ya que tiene que manejar el estado idModulo.
   // Este estado es el encargado de actualizar el formulario en función de los el estado idModulo.

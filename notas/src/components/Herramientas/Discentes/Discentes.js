@@ -1,8 +1,8 @@
 import { collection, doc, onSnapshot, Timestamp } from "firebase/firestore";
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import DiscentesContexto from "../contextos/discentesContext";
-import { basedatos } from "../firebase";
+import DiscentesContexto from "../../../contextos/discentesContext";
+import { basedatos } from "../../../firebase";
 import Discente from "./Discente";
 
 const Discentes = () => {

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import { acortar } from "../bibliotecas/funciones";
-import PracticasContexto from "../contextos/practicasContexto";
+import { acortar } from "../../../bibliotecas/funciones";
+import PracticasContexto from "../../../contextos/practicasContexto";
 
 const Practica = (props) => {
   const { setIdPractica } = useContext(PracticasContexto);

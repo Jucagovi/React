@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import DiscentesContexto from "../contextos/discentesContext";
+import DiscentesContexto from "../../../contextos/discentesContext";
 
 const Discente = (props) => {
   const { setIdDiscente } = useContext(DiscentesContexto);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { basedatos } from "../firebase.js";
 import {
   collection,
   addDoc,
@@ -10,9 +9,10 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import ModuloContext from "../contextos/modulosContext.js";
+import ModulosContext from "../../../contextos/modulosContext";
+import { basedatos } from "../../../firebase";
 const ModuloForm = (props) => {
-  const { modulo, setModulo, valoresIniciales } = useContext(ModuloContext);
+  const { modulo, setModulo, valoresIniciales } = useContext(ModulosContext);
 
   // Usando contextos
 

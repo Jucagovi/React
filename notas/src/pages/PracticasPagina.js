@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Practicas from "../components/Practicas";
-import PracticasForm from "../components/PracticasForm";
-import PracticasModulos from "../components/PracticasModulos";
+import Practicas from "../components/Herramientas/Practicas/Practicas";
+import PracticasForm from "../components/Herramientas/Practicas/PracticasForm";
+import PracticasModulos from "../components/Herramientas/Practicas/PracticasModulos";
 
 const PracticasPagina = () => {
   return (

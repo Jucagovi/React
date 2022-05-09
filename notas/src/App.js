@@ -14,6 +14,8 @@ import { ModulosProveedor } from "./contextos/modulosContext";
 import { DiscentesProveedor } from "./contextos/discentesContext";
 import { PrcaticasProveedor } from "./contextos/practicasContexto";
 import PracticasPagina from "./pages/PracticasPagina";
+import { NotasProveedor } from "./contextos/notasContexto";
+import NotasPagina from "./pages/NotasPagina";
 
 function App() {
   return (
@@ -29,6 +31,14 @@ function App() {
             <Col>
               <Routes>
                 <Route path="/" element={<HomePagina />} />
+                <Route
+                  path="/notas"
+                  element={
+                    <NotasProveedor>
+                      <NotasPagina />
+                    </NotasProveedor>
+                  }
+                />
                 <Route
                   path="/practicas"
                   element={
