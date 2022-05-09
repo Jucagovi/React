@@ -15,6 +15,7 @@ const NotasProveedor = (props) => {
     peso: 0,
     titulo: "",
   };
+  let listadoNotas = null;
   /*****************************************
      Estados del contexto 
    *****************************************/
@@ -50,6 +51,25 @@ const NotasProveedor = (props) => {
     });
   };
 
+  // Crea un objeto a partir de los dos estados (discentes y notas) para crear un tercer estado (listadoNotas) que controle el formulario de notas.
+  const listarNotas = () => {
+    const listadoNotas = discentes.map((discente) => {
+      let nota;
+      discente.notas.map((n) => {
+        if (n.numero === numeroPractica) {
+          nota = n.nota;
+        }
+      });
+      return {
+        id: discente.id,
+        nombre: discente.nombre,
+        apellidos: discente.apellidos,
+        numero: numeroPractica,
+        nota: nota,
+      };
+    });
+  };
+
   const datos = {
     modulos,
     setModulos,
@@ -64,12 +84,14 @@ const NotasProveedor = (props) => {
     practica,
     setPractica,
     notas,
+    listadoNotas,
     discentes,
     setDiscentes,
     setNotas,
     obtenerModulos,
     obtenerPracticas,
     obtenerDiscentes,
+    listarNotas,
   };
 
   return (
