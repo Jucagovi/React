@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
 import NotasContexto from "../../contextos/notasContexto";
 
 const NotasForm = () => {
-  const { practicas, discentes, setDiscentes, numeroPractica } =
+  const { practicas, discentes, setDiscentes, numeroPractica, idPractica } =
     useContext(NotasContexto);
   const [listadoNotas, setListadoNotas] = useState(null);
 
@@ -14,17 +14,12 @@ const NotasForm = () => {
     const { value, id } = e.target;
     const listadoTemp = listadoNotas.map((ln) => {
       if (ln.id === id) {
-        return {
-          id: ln.id,
-          nombre: ln.nombre,
-          apellidos: ln.apellidos,
-          numero: ln.numero,
-          nota: Number(value),
-        };
+        return { ...ln, nota: Number(value) };
       } else {
         return ln;
       }
     });
+    console.log(listadoTemp);
     setListadoNotas(listadoTemp);
   };
 
@@ -33,7 +28,7 @@ const NotasForm = () => {
     const listado = discentes.map((discente) => {
       let nota;
       discente.notas.map((n) => {
-        if (n.numero === numeroPractica) {
+        if (n.id === idPractica) {
           nota = Number(n.nota);
         }
       });
@@ -41,7 +36,7 @@ const NotasForm = () => {
         id: discente.id,
         nombre: discente.nombre,
         apellidos: discente.apellidos,
-        numero: numeroPractica,
+        idPractica: idPractica,
         nota: Number(nota),
       };
     });
@@ -57,9 +52,9 @@ const NotasForm = () => {
         //Cambio las notas si coinciden.
         if (d.id === ln.id) {
           const nuevasNotas = d.notas.map((n) => {
-            if (ln.numero === n.numero) {
+            if (ln.idPractica === n.id) {
               return {
-                numero: ln.numero,
+                id: ln.idPractica,
                 nota: ln.nota,
               };
             } else {
@@ -116,7 +111,7 @@ const NotasForm = () => {
                           type="number"
                           placeholder="S/N"
                           name="nota"
-                          value={ln.nota}
+                          value={Number(ln.nota)}
                         />
                       </td>
                     </tr>
@@ -133,7 +128,6 @@ const NotasForm = () => {
         </Row>
         <Row>
           <Col>
-            {/* <pre>{JSON.stringify(listadoNotas, null, 2)}</pre> */}
             <pre>{JSON.stringify(listadoNotas, null, 2)}</pre>
           </Col>
           <Col>

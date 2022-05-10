@@ -2,6 +2,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   onSnapshot,
   Timestamp,
   updateDoc,
@@ -11,10 +12,16 @@ import { toast } from "react-toastify";
 import { aleatorio, construirPractica } from "../bibliotecas/funciones";
 import { basedatos } from "../firebase";
 
+/*
+* COSAS A REVISAR
+  Cuando se crea un discente, comprobar si hay prácticas en el módulo y añadir la nota a 0
+*
+*/
+
 const valoresIniciales = null;
 const valorInicial = null;
 const practicaInicial = {
-  id: aleatorio(6), //Timestamp.now().toMillis() % 1000000,
+  id: aleatorio(6),
   evaluacion: 0,
   numero: "",
   orden: 0,
@@ -30,6 +37,7 @@ const PrcaticasProveedor = (props) => {
   const [practicas, setPracticas] = useState(valoresIniciales);
   const [practica, setPractica] = useState(practicaInicial);
   const [idPractica, setIdPractica] = useState(valorInicial);
+  const [discentes, setDiscentes] = useState(null);
 
   const obtenerModulos = async () => {
     await onSnapshot(collection(basedatos, "modulos"), (modulosListado) => {
@@ -43,9 +51,34 @@ const PrcaticasProveedor = (props) => {
     });
   };
 
-  // CREAR FUNCIÓN PARA INTRODUCIR LA NOTA (A -1) EN CADA DISCENTE.
-  // Cuando se crea un discente, comprobar si hay prácticas en el módulo y añadir la nota a -1
-  // (cero es que tiene un 0 en ella, -1 es no entregada)
+  const obtenerDiscentes = async (id) => {
+    const tempDiscentes = await getDoc(
+      doc(collection(basedatos, "modulos"), id)
+    );
+    setDiscentes(tempDiscentes.data().discentes);
+  };
+
+  // Función para introducir una nota a 0 por cada práctica creada.
+  const rellenarPracticas = async (id) => {
+    // Obtengo el listado de discentes de este módulo.
+    const tempDiscentes = await getDoc(
+      doc(collection(basedatos, "modulos"), idModulo)
+    );
+    // Se crea un nuevo array con los discentes añadiéndole la práctica recien creada.
+    const nuevosDiscentes = tempDiscentes.data().discentes.map((d) => {
+      const nuevoD = {
+        id: id,
+        nota: 0,
+      };
+      // Añado a lo que ya existe en notas (...d.notas) la nueva nota a o (nuevoD).
+      d.notas = [...d.notas, nuevoD];
+      return d;
+    });
+    // Se actualiza el modulo con los nuevos discentes en Firebase.
+    await updateDoc(doc(collection(basedatos, "modulos"), idModulo), {
+      discentes: nuevosDiscentes,
+    });
+  };
 
   const enviarForm = async () => {
     if (!practica.titulo || !practica.numero) {
@@ -68,11 +101,10 @@ const PrcaticasProveedor = (props) => {
           }
         );
       } else {
-        const resultado = await updateDoc(
-          doc(collection(basedatos, "modulos"), idModulo),
-          { practicas: arrayUnion(practica) }
-        );
-
+        await updateDoc(doc(collection(basedatos, "modulos"), idModulo), {
+          practicas: arrayUnion(practica),
+        });
+        rellenarPracticas(practica.id);
         toast.info(
           `Practica ${practica.titulo} guardada con el id ${practica.id}`
         );

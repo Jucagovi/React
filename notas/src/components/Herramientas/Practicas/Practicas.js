@@ -33,14 +33,6 @@ const Practicas = () => {
                   onClick={() => {
                     setIdPractica(null);
                     //De esta forma se genera un nuevo "id" para el estado "practica".
-                    /*  setPractica({
-                      id: Timestamp.now().toMillis() % 1000000,
-                      evaluacion: 0,
-                      numero: "",
-                      orden: 0,
-                      peso: 0,
-                      titulo: "",
-                    }); */
                     setPractica(construirPractica());
                   }}
                 >
