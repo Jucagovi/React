@@ -6,6 +6,7 @@ import NotasPractica from "./NotasPractica";
 const NotasModulo = (props) => {
   const { datos, id } = props;
   const { setIdModulo, setNumeroPractica } = useContext(NotasContexto);
+
   return (
     <React.Fragment>
       <div className="botonModulo" key={id} id={id}>

@@ -43,6 +43,10 @@ const PrcaticasProveedor = (props) => {
     });
   };
 
+  // CREAR FUNCIÓN PARA INTRODUCIR LA NOTA (A -1) EN CADA DISCENTE.
+  // Cuando se crea un discente, comprobar si hay prácticas en el módulo y añadir la nota a -1
+  // (cero es que tiene un 0 en ella, -1 es no entregada)
+
   const enviarForm = async () => {
     if (!practica.titulo || !practica.numero) {
       toast.error("Faltan valores obligatorios.");

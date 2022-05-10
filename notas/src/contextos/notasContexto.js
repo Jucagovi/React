@@ -1,4 +1,4 @@
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { createContext, useState } from "react";
 import { basedatos } from "../firebase";
 
@@ -51,23 +51,13 @@ const NotasProveedor = (props) => {
     });
   };
 
-  // Crea un objeto a partir de los dos estados (discentes y notas) para crear un tercer estado (listadoNotas) que controle el formulario de notas.
-  const listarNotas = () => {
-    const listadoNotas = discentes.map((discente) => {
-      let nota;
-      discente.notas.map((n) => {
-        if (n.numero === numeroPractica) {
-          nota = n.nota;
-        }
-      });
-      return {
-        id: discente.id,
-        nombre: discente.nombre,
-        apellidos: discente.apellidos,
-        numero: numeroPractica,
-        nota: nota,
-      };
-    });
+  const guardarNotas = async () => {
+    const resultado = await updateDoc(
+      doc(collection(basedatos, "modulos"), idModulo),
+      {
+        discentes: discentes,
+      }
+    );
   };
 
   const datos = {
@@ -91,7 +81,6 @@ const NotasProveedor = (props) => {
     obtenerModulos,
     obtenerPracticas,
     obtenerDiscentes,
-    listarNotas,
   };
 
   return (
