@@ -5,7 +5,8 @@ import NotasPractica from "./NotasPractica";
 
 const NotasModulo = (props) => {
   const { datos, id } = props;
-  const { setIdModulo, setNumeroPractica } = useContext(NotasContexto);
+  const { setIdModulo, setNumeroPractica, setListadoNotas } =
+    useContext(NotasContexto);
 
   return (
     <React.Fragment>
@@ -14,6 +15,7 @@ const NotasModulo = (props) => {
           onClick={() => {
             setIdModulo(id);
             setNumeroPractica(null);
+            setListadoNotas(null);
           }}
         >
           {datos.curso} {datos.abreviatura}

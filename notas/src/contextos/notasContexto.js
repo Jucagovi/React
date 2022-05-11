@@ -15,7 +15,6 @@ const NotasProveedor = (props) => {
     peso: 0,
     titulo: "",
   };
-  let listadoNotas = null;
   /*****************************************
      Estados del contexto 
    *****************************************/
@@ -27,6 +26,7 @@ const NotasProveedor = (props) => {
   const [practica, setPractica] = useState(practicaInicial);
   const [notas, setNotas] = useState(null);
   const [discentes, setDiscentes] = useState(null);
+  const [listadoNotas, setListadoNotas] = useState(null);
 
   /*****************************************
      Funciones del contexto 
@@ -75,6 +75,7 @@ const NotasProveedor = (props) => {
     setPractica,
     notas,
     listadoNotas,
+    setListadoNotas,
     discentes,
     setDiscentes,
     setNotas,

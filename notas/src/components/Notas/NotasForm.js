@@ -3,9 +3,15 @@ import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
 import NotasContexto from "../../contextos/notasContexto";
 
 const NotasForm = () => {
-  const { practicas, discentes, setDiscentes, numeroPractica, idPractica } =
-    useContext(NotasContexto);
-  const [listadoNotas, setListadoNotas] = useState(null);
+  const {
+    practicas,
+    discentes,
+    setDiscentes,
+    numeroPractica,
+    idPractica,
+    listadoNotas,
+    setListadoNotas,
+  } = useContext(NotasContexto);
 
   // Se crea un estado para manejar el formulario.
   // Al cambiar las notas se actualiza ese estado recorriéndolo y modificando el objeto cambiado.
@@ -13,13 +19,12 @@ const NotasForm = () => {
   const cambiarEstado = (e) => {
     const { value, id } = e.target;
     const listadoTemp = listadoNotas.map((ln) => {
-      if (ln.id === id) {
-        return { ...ln, nota: Number(value) };
+      if (ln.id == id) {
+        return { ...ln, ["nota"]: Number(value) };
       } else {
         return ln;
       }
     });
-    console.log(listadoTemp);
     setListadoNotas(listadoTemp);
   };
 
@@ -28,7 +33,7 @@ const NotasForm = () => {
     const listado = discentes.map((discente) => {
       let nota;
       discente.notas.map((n) => {
-        if (n.id === idPractica) {
+        if (n.id == idPractica) {
           nota = Number(n.nota);
         }
       });
@@ -50,9 +55,9 @@ const NotasForm = () => {
       // En temp guardo el array con un solo discente ya modificada su nota.
       const temp = filtradoDiscente.map((d) => {
         //Cambio las notas si coinciden.
-        if (d.id === ln.id) {
+        if (Number(d.id) == Number(ln.id)) {
           const nuevasNotas = d.notas.map((n) => {
-            if (ln.idPractica === n.id) {
+            if (Number(ln.idPractica) == Number(n.id)) {
               return {
                 id: ln.idPractica,
                 nota: ln.nota,
@@ -62,7 +67,7 @@ const NotasForm = () => {
             }
           });
           // Cambio nuevas notas en d y devuelvo un discente.
-          return { ...d, ["notas"]: nuevasNotas };
+          return { ...d, notas: nuevasNotas };
         }
       });
       // Devuelvo el primero (único) objeto del array.
@@ -98,37 +103,40 @@ const NotasForm = () => {
                 </tr>
               </thead>
               <tbody>
-                {listadoNotas?.map((ln) => {
-                  return (
-                    <tr key={ln.id}>
-                      <td>{ln.id}</td>
-                      <td>{ln.nombre}</td>
-                      <td>{ln.apellidos}</td>
-                      <td>
-                        <Form.Control
-                          id={ln.id}
-                          onChange={cambiarEstado}
-                          type="number"
-                          placeholder="S/N"
-                          name="nota"
-                          value={Number(ln.nota)}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
+                {listadoNotas &&
+                  listadoNotas.map((ln) => {
+                    return (
+                      <tr key={ln.id}>
+                        <td>{ln.id}</td>
+                        <td>{ln.nombre}</td>
+                        <td>{ln.apellidos}</td>
+                        <td>
+                          <Form.Control
+                            id={ln.id}
+                            onChange={cambiarEstado}
+                            type="number"
+                            name="nota"
+                            value={ln.nota}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button onClick={guardarNotas}>Guardar notas</Button>
+            {listadoNotas && (
+              <Button onClick={guardarNotas}>Guardar notas</Button>
+            )}
           </Col>
         </Row>
         <Row>
           <Col>
             <pre>{JSON.stringify(listadoNotas, null, 2)}</pre>
+            <p>{idPractica}</p>
           </Col>
           <Col>
             <pre>{JSON.stringify(discentes, null, 2)}</pre>
