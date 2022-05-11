@@ -41,15 +41,15 @@ export let modulo = {
       repetidor: 0,
       notas: [
         {
-          numero: "1.1",
+          id: "1",
           nota: 80,
         },
         {
-          numero: "1.2",
+          id: "2",
           nota: 90,
         },
         {
-          numero: "1.3",
+          id: "3",
           nota: 70,
         },
       ],
@@ -61,15 +61,15 @@ export let modulo = {
       repetidor: 1,
       notas: [
         {
-          numero: "1.1",
+          id: "1",
           nota: 90,
         },
         {
-          numero: "1.2",
+          id: "2",
           nota: 100,
         },
         {
-          numero: "1.3",
+          id: "3",
           nota: 80,
         },
       ],
@@ -81,15 +81,15 @@ export let modulo = {
       repetidor: 0,
       notas: [
         {
-          numero: "1.1",
+          id: "1",
           nota: 60,
         },
         {
-          numero: "1.2",
+          id: "2",
           nota: 50,
         },
         {
-          numero: "1.3",
+          id: "3",
           nota: 60,
         },
       ],
