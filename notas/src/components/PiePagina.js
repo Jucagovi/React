@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-const Pie = () => {
+const PiePagina = () => {
   return (
     <div>
       <React.Fragment>
@@ -15,4 +15,4 @@ const Pie = () => {
   );
 };
 
-export default Pie;
+export default PiePagina;

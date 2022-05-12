@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Container, Row, Col } from "react-bootstrap";
 import AcercaDePagina from "./pages/AcercaDePagina.js";
-import Pie from "./components/Pie";
+import PiePagina from "./components/PiePagina";
 import ModulosPagina from "./pages/ModulosPagina";
 import DiscentesPagina from "./pages/DiscentesPagina";
 import { ModulosProveedor } from "./contextos/modulosContext";
@@ -16,6 +16,7 @@ import { PrcaticasProveedor } from "./contextos/practicasContexto";
 import PracticasPagina from "./pages/PracticasPagina";
 import { NotasProveedor } from "./contextos/notasContexto";
 import NotasPagina from "./pages/NotasPagina";
+import NotasInformePagina from "./pages/NotasInformePagina";
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
             </Col>
           </Row>
           <Row>
-            <Pie />
+            <PiePagina />
           </Row>
         </BrowserRouter>
         {/* <div className="App"></div> */}

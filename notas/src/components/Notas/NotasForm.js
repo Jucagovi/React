@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Table,
+  Form,
+  Tabs,
+  Tab,
+} from "react-bootstrap";
 import NotasContexto from "../../contextos/notasContexto";
+import NotasInformeDetalle from "./NotasInformeDetalle";
 
 const NotasForm = () => {
   const {
@@ -98,53 +108,68 @@ const NotasForm = () => {
         </Row> */}
         <Row>
           <Col>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Apellidos</th>
-                  <th>Nota</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listadoNotas &&
-                  listadoNotas.map((ln) => {
-                    return (
-                      <tr key={ln.id}>
-                        <td>{ln.id}</td>
-                        <td>{ln.nombre}</td>
-                        <td>{ln.apellidos}</td>
-                        <td>
-                          <Form.Control
-                            id={ln.id}
-                            onChange={cambiarEstado}
-                            type="number"
-                            name="nota"
-                            value={ln.nota}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            {listadoNotas && (
-              <Button onClick={guardarNotas}>Guardar notas</Button>
-            )}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <pre>{JSON.stringify(listadoNotas, null, 2)}</pre>
-            <p>{idPractica}</p>
-          </Col>
-          <Col>
-            <pre>{JSON.stringify(discentes, null, 2)}</pre>
+            <Tabs
+              defaultActiveKey="profile"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+            >
+              <Tab eventKey="home" title="Notas">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Nota</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {listadoNotas &&
+                      listadoNotas.map((ln) => {
+                        return (
+                          <tr key={ln.id}>
+                            <td>{ln.id}</td>
+                            <td>{ln.nombre}</td>
+                            <td>{ln.apellidos}</td>
+                            <td>
+                              <Form.Control
+                                id={ln.id}
+                                onChange={cambiarEstado}
+                                type="number"
+                                name="nota"
+                                value={ln.nota}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </Table>
+                <Row>
+                  <Col>
+                    {listadoNotas && (
+                      <Button onClick={guardarNotas}>Guardar notas</Button>
+                    )}
+                  </Col>
+                </Row>
+              </Tab>
+              <Tab eventKey="profile" title="Informe">
+                <NotasInformeDetalle />
+              </Tab>
+              <Tab eventKey="contact" title="Datos">
+                <Container>
+                  <Row>
+                    <Col>
+                      <pre>{JSON.stringify(listadoNotas, null, 2)}</pre>
+                      <p>{idPractica}</p>
+                    </Col>
+                    <Col>
+                      <pre>{JSON.stringify(discentes, null, 2)}</pre>
+                    </Col>
+                  </Row>
+                </Container>
+              </Tab>
+            </Tabs>
           </Col>
         </Row>
       </Container>
