@@ -12,6 +12,7 @@ const NotasForm = () => {
     listadoNotas,
     setListadoNotas,
     guardarDiscentes,
+    idModulo,
   } = useContext(NotasContexto);
 
   // Se crea un estado para manejar el formulario.
@@ -49,7 +50,7 @@ const NotasForm = () => {
     setListadoNotas(listado);
   };
 
-  const guardarNotas = () => {
+  const guardarNotas = async () => {
     const nuevosDiscentes = listadoNotas.map((ln) => {
       // Filtro discentes para que sólo devuelva un valor y no existan undefined devueltos por el map.
       const filtradoDiscente = discentes.filter((d) => d.id === ln.id);
@@ -76,7 +77,9 @@ const NotasForm = () => {
       return temp[0];
     });
     setDiscentes(nuevosDiscentes);
-    guardarDiscentes();
+    console.log("Desde NotasForm");
+    console.log(discentes);
+    guardarDiscentes(nuevosDiscentes);
   };
 
   useEffect(() => {

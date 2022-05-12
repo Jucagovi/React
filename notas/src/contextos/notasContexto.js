@@ -52,13 +52,14 @@ const NotasProveedor = (props) => {
     });
   };
 
-  const guardarDiscentes = async () => {
-    const resultado = await updateDoc(
-      doc(collection(basedatos, "modulos"), idModulo),
-      {
-        discentes: discentes,
-      }
-    );
+  const guardarDiscentes = async (notas) => {
+    console.log("Desde notasContexto");
+    console.log(discentes);
+    // Revisar el porqué no me deja hacerlo con el estado discentes (que es como se debería hacer).
+    await updateDoc(doc(collection(basedatos, "modulos"), idModulo), {
+      discentes: notas,
+    });
+    toast.info(`Notas guardadas para el módulo de ${idModulo}.`);
   };
 
   const datos = {
