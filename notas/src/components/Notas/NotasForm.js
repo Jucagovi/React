@@ -11,6 +11,7 @@ const NotasForm = () => {
     idPractica,
     listadoNotas,
     setListadoNotas,
+    guardarDiscentes,
   } = useContext(NotasContexto);
 
   // Se crea un estado para manejar el formulario.
@@ -75,6 +76,7 @@ const NotasForm = () => {
       return temp[0];
     });
     setDiscentes(nuevosDiscentes);
+    guardarDiscentes();
   };
 
   useEffect(() => {

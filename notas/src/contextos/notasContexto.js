@@ -1,5 +1,6 @@
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 import { basedatos } from "../firebase";
 
 const NotasContexto = createContext();
@@ -51,7 +52,7 @@ const NotasProveedor = (props) => {
     });
   };
 
-  const guardarNotas = async () => {
+  const guardarDiscentes = async () => {
     const resultado = await updateDoc(
       doc(collection(basedatos, "modulos"), idModulo),
       {
@@ -82,6 +83,7 @@ const NotasProveedor = (props) => {
     obtenerModulos,
     obtenerPracticas,
     obtenerDiscentes,
+    guardarDiscentes,
   };
 
   return (
