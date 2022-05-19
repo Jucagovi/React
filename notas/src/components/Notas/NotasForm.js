@@ -87,8 +87,6 @@ const NotasForm = () => {
       return temp[0];
     });
     setDiscentes(nuevosDiscentes);
-    console.log("Desde NotasForm");
-    console.log(discentes);
     guardarDiscentes(nuevosDiscentes);
   };
 

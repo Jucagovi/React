@@ -1,5 +1,8 @@
 import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const datos = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -32,7 +35,7 @@ const NotasInformeDetalle = () => {
   return (
     <React.Fragment>
       <h2>Informe detallado de la prácica</h2>
-      {/* <Pie data={datos} height={400} width={600} /> */}
+      <Pie data={datos} height={400} width={600} />
       <h3>Debajo de la práctica</h3>
     </React.Fragment>
   );
