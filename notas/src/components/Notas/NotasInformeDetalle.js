@@ -1,8 +1,63 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+} from "chart.js";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Pie, Line } from "react-chartjs-2";
+
+ChartJS.register(
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+// Datos del gráfico de líneas
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Chart.js Line Chart",
+    },
+  },
+};
+
+export const data = {
+  labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+  datasets: [
+    {
+      label: "Dataset 1",
+      data: [200, 400, 500, 600, 700, 300, -200],
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+    {
+      label: "Dataset 2",
+      data: [100, 200, -500, -300, 400, 500, 600],
+      borderColor: "rgb(53, 162, 235)",
+      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    },
+  ],
+};
+
+// Datos del gráfico circular
 
 const datos = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -34,9 +89,8 @@ const datos = {
 const NotasInformeDetalle = () => {
   return (
     <React.Fragment>
-      <h2>Informe detallado de la prácica</h2>
       <Pie data={datos} height={400} width={600} />
-      <h3>Debajo de la práctica</h3>
+      <Line options={options} data={data} />
     </React.Fragment>
   );
 };
